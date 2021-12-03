@@ -1,8 +1,8 @@
 import './utils.dart';
 
 class Command {
-  String name;
-  int value;
+  final String name;
+  final int value;
 
   @override
   String toString() {
