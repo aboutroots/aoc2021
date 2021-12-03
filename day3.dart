@@ -1,5 +1,16 @@
 import './utils.dart';
 
+int computeSimilarity(List input, List target) {
+  int score = 0;
+  for (int i = 0; i < target.length; i++) {
+    if (target[i] != input[i]) {
+      break;
+    }
+    score += 1;
+  }
+  return score;
+}
+
 void solve(List<String> lines) {
   List<int> acc = List.filled(lines[0].length, 0);
   List<List<int>> numbers = [];
@@ -24,6 +35,13 @@ void solve(List<String> lines) {
       int.parse(epsilonArr.join(''), radix: 2));
 
   // second part
+  numbers.sort((a, b) =>
+      computeSimilarity(a, gammaArr) - computeSimilarity(b, gammaArr));
+  List<int> o2gen = numbers[0];
+  numbers.sort((a, b) =>
+      computeSimilarity(a, epsilonArr) - computeSimilarity(b, epsilonArr));
+  List<int> co2scrub = numbers[0];
+  print('$o2gen, $co2scrub');
 }
 
 void main() async {
