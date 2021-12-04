@@ -1,0 +1,6 @@
+name: aoc2021
+version: 0.1.0
+environment:
+  sdk: '>=2.10.0 <3.0.0'
+dependencies: 
+  tuple: ^2.0.0
