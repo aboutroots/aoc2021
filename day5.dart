@@ -21,14 +21,29 @@ class Vec {
   List<Tuple2<int, int>> getPoints() {
     List<Tuple2<int, int>> points = [];
     int startX = this.x0 < this.x1 ? this.x0 : this.x1;
-    int startY = this.y0 < this.y1 ? this.y0 : this.y1;
     int endX = startX == this.x0 ? this.x1 : this.x0;
-    int endY = startY == this.y0 ? this.y1 : this.y0;
-    for (int x = startX; x <= endX; x++) {
-      for (int y = startY; y <= endY; y++) {
+
+    if (this.isDiagonal()) {
+      // get only points on diagonal, not a zig-zag!
+      int startY = startX == this.x0 ? this.y0 : this.y1;
+      int endY = startY == this.y0 ? this.y1 : this.y0;
+      int signY = startY < endY ? 1 : -1;
+
+      int y = startY;
+      for (int x = startX; x <= endX; x++) {
         points.add(Tuple2(x, y));
+        y += 1 * signY;
+      }
+    } else {
+      int startY = this.y0 < this.y1 ? this.y0 : this.y1;
+      int endY = startY == this.y0 ? this.y1 : this.y0;
+      for (int x = startX; x <= endX; x++) {
+        for (int y = startY; y <= endY; y++) {
+          points.add(Tuple2(x, y));
+        }
       }
     }
+
     return points;
   }
 }
@@ -41,12 +56,16 @@ int solve(List<String> rows) {
     return Vec(start[0], start[1], end[0], end[1]);
   }).toList();
 
-  // first part
-  List<Vec> nonDiagonal = lines.where((v) => !v.isDiagonal()).toList();
+  // first part lines input
+  // List<Vec> filteredLines = lines.where((v) => !v.isDiagonal()).toList();
+
+  // second part lines input
+  List<Vec> filteredLines = lines;
+
   Set<Tuple2<int, int>> points = Set();
   Set<Tuple2<int, int>> overlapped = Set();
   int overlaps = 0;
-  nonDiagonal.forEach((line) {
+  filteredLines.forEach((line) {
     line.getPoints().forEach((point) {
       if (points.contains(point) && !overlapped.contains(point)) {
         overlaps++;
@@ -55,7 +74,6 @@ int solve(List<String> rows) {
       points.add(point);
     });
   });
-  // solve me!
   return overlaps;
 }
 
