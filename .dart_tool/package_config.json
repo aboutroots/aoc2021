@@ -2,6 +2,12 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "collection",
+      "rootUri": "file:///home/arts/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///home/arts/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11",
       "packageUri": "lib/",
@@ -38,7 +44,7 @@
       "languageVersion": "2.10"
     }
   ],
-  "generated": "2021-12-04T21:17:50.773499Z",
+  "generated": "2021-12-10T06:57:37.145230Z",
   "generator": "pub",
   "generatorVersion": "2.13.1"
 }
