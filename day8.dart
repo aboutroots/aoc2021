@@ -1,54 +1,72 @@
 import './utils.dart';
 
+String sortString(String s) {
+  var l = s.split('');
+  l.sort();
+  return l.join('');
+}
+
 class Entry {
   List<String> patterns;
   List<String> output;
 
   @override
   String toString() {
-    return '[${this.output.join(', ')}]';
+    return '$this.patterns, $this.output';
   }
 
   Entry(this.patterns, this.output);
 
   List<int> parseOutputToDigits() {
-    return this.output.map((s) {
-      if (s.length == 2) {
-        return 1;
-      }
-      if (s.length == 3) {
-        return 7;
-      }
-      if (s.length == 4) {
-        return 4;
-      }
-      if (s.length == 7) {
-        return 8;
-      }
-      return -1;
-    }).toList();
+    List<int> digits = List.filled(4, -1);
+    return digits;
+
+    // while (digits.any((d) => d == -1)) {
+    //   this.output.forEach((letter) { })
+
+    // }
+    //   return this.output.map((s) {
+    //     if (s.length == 2) {
+    //       return 1;
+    //     }
+    //     if (s.length == 4) {
+    //       return 4;
+    //     }
+    //     if (s.length == 3) {
+    //       return 7;
+    //     }
+    //     if (s.length == 7) {
+    //       return 8;
+    //     }
+    //     return -1;
+    //   }).toList();
   }
 }
 
 int solve(List<String> lines) {
   List<Entry> entries = lines.map((String line) {
     List<String> parts = line.trim().split(' | ');
-    List<String> patterns = parts[0].split(' ');
-    List<String> output = parts[1].split(' ');
+    List<String> patterns = parts[0].split(' ').map(sortString).toList();
+    List<String> output = parts[1].split(' ').map(sortString).toList();
     return Entry(patterns, output);
   }).toList();
 
-  // first
-  return entries.fold(0, (int counter, element) {
-    return element
-            .parseOutputToDigits()
-            .fold(0, (int acc, int val) => acc + (val == -1 ? 0 : 1)) +
-        counter;
+  entries.forEach((e) {
+    print(e);
   });
+
+  // first
+  // return entries.fold(0, (int counter, element) {
+  //   return element
+  //           .parseOutputToDigits()
+  //           .fold(0, (int acc, int val) => acc + (val == -1 ? 0 : 1)) +
+  //       counter;
+  // });
+  // second
 }
 
 void main() async {
-  List<String> lines = await readlines('day8.txt');
+  List<String> lines = await readlines('day8test.txt');
   int result = solve(lines);
   print(result);
 }
