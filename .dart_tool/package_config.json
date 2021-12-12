@@ -41,10 +41,10 @@
       "name": "aoc2021",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.10"
+      "languageVersion": "2.13"
     }
   ],
-  "generated": "2021-12-10T19:35:36.790806Z",
+  "generated": "2021-12-12T18:51:15.840902Z",
   "generator": "pub",
   "generatorVersion": "2.13.1"
 }
